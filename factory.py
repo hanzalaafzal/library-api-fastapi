@@ -134,14 +134,14 @@ if __name__ == "__main__":
                     'name': 'Hanzala Afzal',
                     'email': 'hanzala@filament.com',
                     'password' : bcrypt.hashpw(b'hanzala123', bcrypt.gensalt()),
-                    'role' : 1,
+                    'role' : 0,
                     'created_at': datetime.utcnow()
                     },
                     {
                     'name': 'Martin Klug',
                     'email': 'martin@filament.com',
                     'password' : bcrypt.hashpw(b'martin123', bcrypt.gensalt()),
-                    'role' : 1,
+                    'role' : 0,
                     'created_at': datetime.utcnow()
                     }
             ]

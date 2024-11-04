@@ -1,4 +1,5 @@
 from datetime import date,datetime
+from typing import Optional
 from pydantic import BaseModel
 
 
@@ -9,7 +10,9 @@ class BookCreate(BaseModel):
     version:int
     description:str
     author_id: int
-    created_at:datetime
+    category_id: int
+    created_at: Optional[datetime] = datetime.utcnow()
+    available: int
 
 class BookUpdate(BaseModel):
     title: str
@@ -18,3 +21,6 @@ class BookUpdate(BaseModel):
     version:int
     description:str
     author_id: int
+    category_id: int
+    available: int
+    updated_at: Optional[datetime] = datetime.utcnow()
