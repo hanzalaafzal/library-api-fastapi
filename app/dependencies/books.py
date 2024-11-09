@@ -18,17 +18,27 @@ class BookOperations:
     def get_book(self,book_id: int = None):
         
         if not book_id:
-            books = self.db.query(Book).all()
-            return { 'message': 'success', 
-                    'data':[BookResponse.model_validate(book) for book in books] }
+            return self.db.query(Book).all()
         
         book = self.db.query(Book).filter(Book.id == book_id).first()
 
+        return book
+
+    
+    def list_books(self, book_id: int = None):
+        if not book_id:
+            return { 'message': 'success', 
+                    'data':[BookResponse.model_validate(book) for book in self.get_book(self,book_id)] }
+        
+        book = self.db.query(Book).filter(Book.id == book_id).first()
+        
         if not book:
-            raise HTTPException(status_code=404, detail="Book not found")
+            raise HTTPException(status_code=404, detail={ 'message':'error','detail' : 'book not found'})
 
         return { 'message': 'success', 
                 'data': [BookResponse.model_validate(book)] }
+
+
 
     def add_book(self,book):
         

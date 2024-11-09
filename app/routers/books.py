@@ -20,7 +20,7 @@ category_operation = BookCategoryOperations()
 @router.get("",description="Fetch list of available books.",
             response_model = BookApiResponse)
 def list_books():
-    return book_operation.get_book()
+    return book_operation.list_books()
 
 #route to list details of book of single 
 #this can be accessed by both (student "0" and library worker/admin "1")
@@ -29,7 +29,7 @@ def list_books():
             response_model = BookApiResponse)
 
 def get_book(book_id: int):
-    return book_operation.get_book(book_id)
+    return book_operation.list_books(book_id)
 
 #route to create a book
 #this can only be accessed by library worker

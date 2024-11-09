@@ -3,6 +3,7 @@ from app.dependencies.db import Base
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from app.models.authors import Author
+from app.models.bookings import Booking
 
 
 
@@ -24,3 +25,4 @@ class Book(Base):
 
     category = relationship("BookCategory", back_populates = "books")
     author = relationship("Author",back_populates = "books")
+    booking = relationship("Booking", back_populates="book")
