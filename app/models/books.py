@@ -1,6 +1,8 @@
 from sqlalchemy import Column, Integer, String, ForeignKey,Date,DateTime
 from app.dependencies.db import Base
+from sqlalchemy.orm import relationship
 from datetime import datetime
+from app.models.authors import Author
 
 
 
@@ -19,3 +21,6 @@ class Book(Base):
     created_at = Column(DateTime, default = datetime.utcnow())
     author_id = Column(Integer, ForeignKey("authors.id"), nullable = False)
     
+
+    category = relationship("BookCategory", back_populates = "books")
+    author = relationship("Author",back_populates = "books")
