@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String
 from app.dependencies.db import Base
+from sqlalchemy.orm import relationship
 
 class User(Base):
     
@@ -11,3 +12,4 @@ class User(Base):
     password = Column(String)  
     role = Column(Integer)  
     
+    booking = relationship("Booking", back_populates = "user")

@@ -14,7 +14,7 @@ class BookingOperations:
         self.db: Session = next(get_db())
     
 
-    def get_booking(self, booking_id: int):
+    def get_booking(self, booking_id: int = None):
         if not booking_id:
             return self.db.query(Booking).all()
         
@@ -27,6 +27,11 @@ class BookingOperations:
     
     def add_booking(self, booking):
         try:
+        
+         book = book_operation.get_book(booking.book_id)
+
+         if not book:
+             raise HTTPException(status_code=404, detail={ 'message':'error','detail' : 'Book not found. Please enter available book id'})
 
          new_booking = Booking(book_id = booking.book_id, users_id = booking.users_id,
                             approved = 0 ) #by default approved is zero

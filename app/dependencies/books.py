@@ -28,16 +28,15 @@ class BookOperations:
     def list_books(self, book_id: int = None):
         if not book_id:
             return { 'message': 'success', 
-                    'data':[BookResponse.model_validate(book) for book in self.get_book(self,book_id)] }
+                    'data':[BookResponse.model_validate(book) for book in self.get_book() ] }
         
-        book = self.db.query(Book).filter(Book.id == book_id).first()
+        book = self.get_book(self, book_id)
         
         if not book:
             raise HTTPException(status_code=404, detail={ 'message':'error','detail' : 'book not found'})
 
         return { 'message': 'success', 
                 'data': [BookResponse.model_validate(book)] }
-
 
 
     def add_book(self,book):
